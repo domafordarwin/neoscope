@@ -1,26 +1,191 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* 커스텀 슬라이더 스타일 */
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .slider::-webkit-slider-track {
+    background: rgba(59, 130, 246, 0.2);
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgb(59, 130, 246);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    background: rgb(37, 99, 235);
+    transform: scale(1.1);
+  }
+
+  .slider::-moz-range-track {
+    background: rgba(59, 130, 246, 0.2);
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+  }
+
+  .slider::-moz-range-thumb {
+    background: rgb(59, 130, 246);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .slider::-moz-range-thumb:hover {
+    background: rgb(37, 99, 235);
+    transform: scale(1.1);
+  }
+
+  /* 네오픽셀 조명 효과 */
+  .neopixel-glow {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+  }
+
+  .neopixel-glow:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 0, 0.5);
+  }
+
+  /* 현미경 렌즈 효과 */
+  .microscope-lens {
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  }
+
+  /* 반응형 그리드 */
+  .responsive-grid {
+    @apply grid;
+    @apply grid-cols-1;
+    @apply md:grid-cols-2;
+    @apply lg:grid-cols-3;
+    @apply xl:grid-cols-4;
+  }
+
+  /* 글래스모피즘 효과 */
+  .glass {
+    @apply bg-white/10;
+    @apply backdrop-blur-md;
+    @apply border border-white/20;
+    @apply shadow-xl;
+  }
+
+  /* 애니메이션 */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* 스크롤바 스타일링 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.7);
+  }
+
+  /* 포커스 스타일 */
+  .focus-ring {
+    @apply focus:outline-none;
+    @apply focus:ring-2;
+    @apply focus:ring-blue-500;
+    @apply focus:ring-offset-2;
+    @apply focus:ring-offset-slate-900;
+  }
+
+  /* 버튼 호버 효과 */
+  .btn-hover {
+    @apply transition-all;
+    @apply duration-200;
+    @apply ease-in-out;
+    @apply transform;
+    @apply hover:scale-105;
+    @apply active:scale-95;
+  }
+
+  /* 카드 호버 효과 */
+  .card-hover {
+    @apply transition-all;
+    @apply duration-300;
+    @apply ease-in-out;
+    @apply hover:shadow-2xl;
+    @apply hover:-translate-y-1;
+  }
+}
+
+@layer utilities {
+  /* 텍스트 그라디언트 */
+  .text-gradient {
+    @apply bg-gradient-to-r;
+    @apply from-blue-400;
+    @apply to-cyan-400;
+    @apply bg-clip-text;
+    @apply text-transparent;
+  }
+
+  /* 배경 그라디언트 */
+  .bg-gradient-dark {
+    @apply bg-gradient-to-br;
+    @apply from-slate-900;
+    @apply via-blue-900;
+    @apply to-slate-900;
+  }
+
+  /* 테두리 그라디언트 */
+  .border-gradient {
+    @apply border;
+    @apply border-transparent;
+    @apply bg-gradient-to-r;
+    @apply from-blue-500;
+    @apply to-cyan-500;
+    @apply bg-clip-border;
+  }
 }
